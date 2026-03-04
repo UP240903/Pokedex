@@ -1,8 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 
 
 export default function Index() {
+
+    const [result, setResult] = useState<any[]>([]);
+
     useEffect(() => {
     console.log("Entre en pantalla");
     getPokemon();
@@ -11,14 +14,15 @@ export default function Index() {
 
   const getPokemon = async () => {
     try {
-  const URL = "https://pokeapi.co/api/v2/pokemon/ditto";
+  const URL = "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0";
   const response = await fetch(URL, {
     method: "GET",
   });
 
 
   if (response.ok) {
-    console.log("request ok ");
+    const data = await response.json();
+    setResult(data.results);
     }else {
       console.log("bard request");
     } 
@@ -29,7 +33,9 @@ export default function Index() {
 
   return (
     <View>
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      {result.map((item)=> {
+        return <Text key= {item.name}>{item.name}</Text>;
+      })}
     </View>
   );
   }
