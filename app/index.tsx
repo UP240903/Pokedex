@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { Text, View, ScrollView} from "react-native";
 import PokemonCard from "../components/PokemonCard"; 
 
 
@@ -33,7 +33,7 @@ export default function Index() {
 }
 
   return (
-    <View>
+    <ScrollView>
       {result.map((item)=> {
         return <PokemonCard 
         key = {item.name}
@@ -41,6 +41,6 @@ export default function Index() {
         url={item.url}
         />;
       })}
-    </View>
+    </ScrollView>
   );
   }
