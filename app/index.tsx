@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
 import { Text, View, ScrollView} from "react-native";
 import PokemonCard from "../components/PokemonCard"; 
+import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
+
+
+interface Pokemon {
+  name: string;
+  url: string;
+}
+
 
 
 export default function Index() {
-
-    const [result, setResult] = useState<any[]>([]);
-
+    const [result, setResult] = useState<Pokemon[]>([]);
     useEffect(() => {
     console.log("Entre en pantalla");
     getPokemon();
